@@ -33,7 +33,7 @@ public class WarehouseController {
 
     // Get warehouse by ID
     @GetMapping("/warehouses/{id}")
-    public ResponseEntity<Warehouse> getWarehouseById(@PathVariable Long id) {
+    public ResponseEntity<Warehouse> getWarehouseById(@PathVariable Integer id) {
         Optional<Warehouse> warehouseOptional = warehouseRepository.findById(id);
         return warehouseOptional.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -41,7 +41,7 @@ public class WarehouseController {
 
     // Update an existing warehouse
     @PutMapping("/warehouses/{id}")
-    public ResponseEntity<Warehouse> updateWarehouse(@PathVariable Long id, @RequestBody Warehouse updatedWarehouse) {
+    public ResponseEntity<Warehouse> updateWarehouse(@PathVariable Integer id, @RequestBody Warehouse updatedWarehouse) {
         Optional<Warehouse> existingWarehouseOptional = warehouseRepository.findById(id);
         if (existingWarehouseOptional.isPresent()) {
             Warehouse existingWarehouse = existingWarehouseOptional.get();
@@ -55,7 +55,7 @@ public class WarehouseController {
 
     // Delete a warehouse by ID
     @DeleteMapping("/warehouses/{id}")
-    public ResponseEntity<Void> deleteWarehouse(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteWarehouse(@PathVariable Integer id) {
         if (warehouseRepository.existsById(id)) {
             warehouseRepository.deleteById(id);
             return ResponseEntity.noContent().build();
