@@ -21,6 +21,10 @@ public class Product {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
+    @ManyToOne
+    @JoinColumn(name = "location", nullable = false)
+    private Warehouse location;
+
     // Constructors
     public Product() {
     }

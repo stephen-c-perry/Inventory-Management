@@ -1,6 +1,10 @@
 package com.skillstorm.models;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
+import java.util.List;
 
 @Component //trying to see if this fixes BeanCreationException
 @Entity
@@ -16,7 +20,12 @@ public class Warehouse {
     @Column(name = "capacity", nullable = false)
     private int capacity;
 
+    @OneToMany(mappedBy = "location")
+    @JsonIgnore
+    List <Product> productList;
+
     // Constructors
+
     public Warehouse() {
     }
 
@@ -50,6 +59,14 @@ public class Warehouse {
         this.capacity = capacity;
     }
 
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -80,4 +97,6 @@ public class Warehouse {
             return false;
         return true;
     }
+
+   
 }

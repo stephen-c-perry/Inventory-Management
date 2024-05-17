@@ -20,6 +20,8 @@ public class ProductController {
     // Create a new product
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        //how many products in warehouse if products less than capacity save, if at 
+        //capacity return bad request
         Product newProduct = productRepository.save(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(newProduct);
     }
